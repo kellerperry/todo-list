@@ -1,5 +1,6 @@
 function Task (name) {
     name;
+    this.status = "open";
     
     const addDescription = (description) => {
         this.description = description;
@@ -33,8 +34,16 @@ function Task (name) {
         return this.project;
     }
 
+    const setStatus = (newStatus) => {
+        this.status = newStatus;
+    }
+
+    const getStatus = () => {
+        return this.status;
+    }
+
     
-    return { name, addDescription, getDescription, setPriority, addProject, getProject, getPriority, setDueDate, getDueDate }
+    return { name, addDescription, getDescription, setPriority, addProject, getProject, getPriority, setDueDate, getDueDate, setStatus, getStatus }
 }
 
 
