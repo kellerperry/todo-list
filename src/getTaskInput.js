@@ -7,7 +7,7 @@ export default function getTaskInput () {
     const priority = document.getElementById("priority").value;
     const project = document.getElementById('project').value;
 
-    const newTask = Task(name, description, dueDate, priority, project);
+    const newTask = new Task(name, description, dueDate, priority, project);
 
     return newTask;
 }
