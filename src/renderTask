@@ -1,0 +1,101 @@
+// import setTaskStatus from "./setStatus";
+import Task from "./task";
+import taskStorage from "./taskStorage";
+import getTaskInput from "./getTaskInput";
+
+function initializePage() {
+    const content = document.getElementById('content');
+    const taskDialog = document.createElement('dialog');
+    const addTaskBtn = document.createElement('button');
+
+    taskDialog.setAttribute('id', 'task-modal');
+
+    content.appendChild(taskDialog);
+    taskDialog.appendChild(renderTask());
+    content.appendChild(taskDialog);
+    
+    addTaskBtn.textContent = "Add task";
+
+    addTaskBtn.addEventListener('click', () => {
+        taskDialog.show();
+    });
+    
+    content.appendChild(addTaskBtn);
+    
+  
+     
+    // content.appendChild(renderMain());
+    
+
+ }
+
+
+
+function renderTask (task) {
+   const taskMain = document.createElement('form');
+   const statusBtn = document.createElement('input');
+   const taskName = document.createElement('input');
+   const taskDescription = document.createElement('input');
+   const dueDateBtn = document.createElement('button');
+   const priorityBtn = document.createElement('button');
+   const projectBtn = document.createElement('button');
+   const cancelBtn = document.createElement('button');
+   const addTaskBtn = document.createElement('button');
+   const taskDialog = document.getElementById('task-modal');
+
+    taskMain.setAttribute('method', 'dialog');
+    taskName.setAttribute('id', 'task-name');
+    taskDescription.setAttribute('id', 'description');
+    dueDateBtn.setAttribute('id', 'due-date');
+    priorityBtn.setAttribute('id', 'priority');
+    projectBtn.setAttribute('id', 'project');
+
+   cancelBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        taskMain.reset();
+        taskDialog.close();
+    })
+
+    addTaskBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const newTask = getTaskInput();
+        taskStorage().addTaskToStorage(newTask);
+        taskMain.reset();
+        taskDialog.close();
+        // Need to display tasks here
+    })
+
+   taskName.setAttribute('type', 'text');
+   taskName.setAttribute('placeholder', "Task name");
+   
+   taskDescription.setAttribute('type', 'text');
+   taskDescription.setAttribute('placeholder', "Description");
+   
+   statusBtn.setAttribute('type', 'radio');
+   statusBtn.setAttribute('id', 'status-btn');
+
+//    dueDateBtn.textContent = task.dueDate ? `${task.dueDate}` : "";
+//    priorityBtn.textContent = task.priority ? `${task.priority}` : "Priority";
+//    projectBtn.textContent = task.project ? `${task.project}` : "Add project";
+   cancelBtn.textContent = "Cancel";
+   addTaskBtn.textContent = "Add task";
+
+
+
+   
+   taskMain.appendChild(statusBtn);
+   taskMain.appendChild(taskName);
+   taskMain.appendChild(taskDescription);
+   taskMain.appendChild(dueDateBtn);
+   taskMain.appendChild(priorityBtn);
+   taskMain.appendChild(projectBtn);
+   taskMain.appendChild(cancelBtn);
+   taskMain.appendChild(addTaskBtn);
+
+   
+   return taskMain;
+}
+
+
+
+ export default initializePage;
